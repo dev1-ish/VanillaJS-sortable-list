@@ -30,6 +30,8 @@ function createList() {
         .forEach((wizard, index) => {
             const listItem = document.createElement('li');
 
+            // listItem.classList.add('right');
+
             listItem.setAttribute('data-index', index);
 
             listItem.innerHTML = `
