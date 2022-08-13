@@ -2,16 +2,16 @@ const draggable_list = document.getElementById('draggable-list')
 const check = document.getElementById('check');
 
 const mostPowerfulWizards = [
-    'Harry Potter',
-    'Lord Voldemort',
     'Albus Dumbledore',
+    'Lord Voldemort',
     'Severus Snape',
+    'Harry Potter',
     'Sirius Black',
-    'Minerva McGonagall',
     'Hermione Granger',
     'Alastor Moody',
+    'Bellatrix Lestrange',
     'Remus Lupin',
-    'Bellatrix Lestrange'
+    'Minerva McGonagall'
 ];
 
 // Store listitems
@@ -76,12 +76,27 @@ function dragDrop() {
     this.classList.remove('over');
 }
 
+// Swap list items that are drag and drop
 function swapItems(fromIndex, toIndex) {
     const itemOne = listItems[fromIndex].querySelector('.draggable');
     const itemTwo = listItems[toIndex].querySelector('.draggable');
 
     listItems[fromIndex].appendChild(itemTwo);
     listItems[toIndex].appendChild(itemOne);
+}
+
+// Check the order of list items
+function checkOrder() {
+    listItems.forEach((listItem, index) => {
+        const wizardName = listItem.querySelector('.draggable').innerText.trim();
+
+        if (wizardName !== mostPowerfulWizards[index]) {
+            listItem.classList.add('wrong');
+        } else {
+            listItem.classList.remove('wrong');
+            listItem.classList.add('right');
+        }
+    });
 }
 
 function addEventListeners() {
@@ -98,3 +113,5 @@ function addEventListeners() {
         item.addEventListener('dragleave', dragLeave);
     })
 }
+
+check.addEventListener('click', checkOrder);
